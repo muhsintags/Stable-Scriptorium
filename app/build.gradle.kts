@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-  namespace = "com.Muhsin.kutuphane"
+  namespace = "com.muhsintags.scriptorium"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {
-    applicationId = "com.Muhsin.kutuphane"
+    applicationId = "com.muhsintags.scriptorium"
     minSdk = 24
     targetSdk = 36
     versionCode = 1
