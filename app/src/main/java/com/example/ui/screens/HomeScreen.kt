@@ -60,7 +60,7 @@ fun HomeScreen(
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         AsyncImage(
-                            model = com.Muhsin.kutuphane.R.drawable.app_logo_icon_1785607132737,
+                            model = com.muhsintags.scriptorium.R.drawable.app_logo_icon_1785607132737,
                             contentDescription = "Scriptorium Logo",
                             modifier = Modifier
                                 .size(36.dp)

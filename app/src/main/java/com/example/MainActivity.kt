@@ -53,7 +53,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.data.model.Book
-import com.example.BuildConfig
+import com.muhsintags.scriptorium.BuildConfig
 import com.example.ui.screens.AppearanceScreen
 import com.example.ui.screens.HomeScreen
 import com.example.ui.screens.LibraryScreen
