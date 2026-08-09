@@ -594,6 +594,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+}
 
 @Composable
 private fun ModernNavItem(
