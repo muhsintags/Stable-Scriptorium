@@ -17,7 +17,7 @@
 
 ## About
 
-**Scriptorium** *(formerly "Din Kütüphanesi")* is a native Android app that brings sacred and classical texts from multiple traditions together in a single, clean, offline-friendly library — built for reading, comparing, and translating scripture without the clutter.
+**Scriptorium** *(formerly "Din Kütüphanesi( Means: Library of Religions )"* is a native Android app that brings sacred and classical texts from multiple traditions together in a single, clean, offline-friendly library — built for reading, comparing, and translating scripture without the clutter.
 
 ## Features
 
