@@ -16,7 +16,8 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-text-size-adjust: 100%; }
-    body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); padding-bottom: 60px; overflow-x: hidden; }
+    body { font-family: var(--font-family); background-color: var(--bg-color); color: var(--text-color); padding-bottom: 60px; overflow-x: hidden; perspective: 1000px; }
+    
     #cursor-light { position: absolute; width: 350px; height: 350px; background: radial-gradient(circle, rgba(0, 122, 255, 0.2) 0%, rgba(0, 0, 0, 0) 70%); pointer-events: none; transform: translate(-50%, -50%); z-index: 9999; filter: blur(25px); }
     .spark { position: absolute; width: 4px; height: 4px; background: #007aff; border-radius: 50%; pointer-events: none; box-shadow: 0 0 10px #007aff, 0 0 20px #007aff; animation: spark-anim 0.8s linear forwards; z-index: 10000; }
     @keyframes spark-anim { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(0) translate(var(--tx), var(--ty)); opacity: 0; } }
@@ -28,6 +29,8 @@
         padding: 40px 24px;
         position: relative;
         z-index: 2;
+        transform-style: preserve-3d;
+        transition: transform 0.1s ease-out;
     }
     .language-selector { margin-bottom: 30px; text-align: center; }
     .language-selector select {
@@ -40,6 +43,67 @@
         font-size: 15px;
         max-width: 100%;
     }
+
+    /* 3D Interactive UI Bars */
+    .bar-container {
+        position: relative;
+        background: linear-gradient(90deg, #161619, #1e1e24);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        height: 48px;
+        margin-bottom: 25px;
+        overflow: visible;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .bar-label {
+        font-size: 13px;
+        color: var(--secondary-text);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Pixel Art Crows */
+    .pixel-crow {
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        bottom: 0px;
+        image-rendering: pixelated;
+        z-index: 20;
+        transform-origin: bottom center;
+        transition: transform 0.2s;
+    }
+    /* Pure CSS Pixel Art Crow Matrix */
+    .pixel-crow::before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #f5f5f7;
+        box-shadow: 
+            /* Beak */
+            20px 8px 0 #ffaa00, 24px 8px 0 #ffaa00,
+            /* Head & Body */
+            12px 4px 0 #111, 16px 4px 0 #111, 8px 8px 0 #111, 12px 8px 0 #111, 16px 8px 0 #111, 20px 8px 0 #111,
+            4px 12px 0 #111, 8px 12px 0 #111, 12px 12px 0 #111, 16px 12px 0 #111, 20px 12px 0 #111,
+            4px 16px 0 #111, 8px 16px 0 #111, 12px 16px 0 #111, 16px 16px 0 #111,
+            /* Legs */
+            8px 20px 0 #ffaa00, 16px 20px 0 #ffaa00;
+    }
+    .pixel-crow.flipping {
+        transform: scaleX(-1);
+    }
+    .pixel-crow.pecking {
+        animation: peck 0.4s infinite alternate;
+    }
+    @keyframes peck {
+        0% { transform: translateY(0) rotate(0deg); }
+        100% { transform: translateY(4px) rotate(15deg); }
+    }
+
     .policy-section {
         background-color: var(--card-bg);
         border-radius: 18px;
@@ -49,6 +113,12 @@
         backdrop-filter: blur(20px);
         word-wrap: break-word;
         overflow-wrap: break-word;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .policy-section:hover {
+        border-color: rgba(0, 122, 255, 0.4);
+        transform: translateY(-2px);
     }
     .policy-section h2 { font-size: 19px; margin-bottom: 10px; line-height: 1.3; }
     .policy-section p { color: var(--secondary-text); font-size: 15px; line-height: 1.6; }
@@ -59,6 +129,7 @@
         font-weight: 800;
         margin-bottom: 8px;
         line-height: 1.1;
+        text-shadow: 0 5px 15px rgba(0,0,0,0.5);
     }
     .updated { color: var(--secondary-text); font-size: 14px; margin-bottom: 30px; display: block; }
     [dir="rtl"] .language-selector { direction: ltr; }
@@ -67,28 +138,17 @@
         .container { padding: 32px 20px; }
         .policy-section { padding: 20px; border-radius: 14px; }
     }
-
     @media (max-width: 480px) {
         .container { padding: 24px 16px; }
         .language-selector select { width: 100%; }
         .policy-section { padding: 18px; margin-bottom: 16px; }
-        .policy-section h2 { font-size: 17px; }
-        .policy-section p { font-size: 14px; }
-        #cursor-light { display: none; }
-    }
-
-    @media (min-width: 1400px) {
-        .container { max-width: 800px; }
-    }
-
-    @media (hover: none) and (pointer: coarse) {
         #cursor-light { display: none; }
     }
 </style>
 </head>
 <body>
 <div id="cursor-light"></div>
-<div class="container">
+<div class="container" id="mainContainer">
     <div class="language-selector">
         <select id="langSelect" onchange="changeContent()">
             <option value="en">English</option>
@@ -101,10 +161,22 @@
         </select>
     </div>
 
+    <div class="bar-container" id="topBar">
+        <span class="bar-label" id="barLabel">System Status: Active // Security Grid Online</span>
+        <div class="pixel-crow" id="crow1" style="left: 50px;"></div>
+    </div>
+
     <h1 id="title">Privacy Policy</h1>
     <span class="updated" id="updated">Last updated: August 2026</span>
+    
+    <div class="bar-container" id="middleBar" style="margin-top: 10px; margin-bottom: 25px;">
+        <span class="bar-label" id="barLabel2">Data Encryption Module // Local Room DB</span>
+        <div class="pixel-crow" id="crow2" style="left: 200px;"></div>
+    </div>
+
     <div id="policy-body"></div>
 </div>
+
 <script>
     const updatedText = {
         en: "Last updated: August 2026", tr: "Son güncelleme: Ağustos 2026",
@@ -193,6 +265,15 @@
     }
     changeContent();
 
+    // 3D Parallax Tilt Effect on Mouse Move
+    const container = document.getElementById('mainContainer');
+    document.addEventListener('mousemove', (e) => {
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+        container.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+    });
+
+    // Cursor lighting effect
     const cursor = document.getElementById('cursor-light');
     document.addEventListener('mousemove', (e) => {
         cursor.style.left = e.pageX + 'px';
@@ -210,6 +291,33 @@
             setTimeout(() => spark.remove(), 800);
         }
     });
+
+    // Pixel Crows Automated Movement Simulation on Bars
+    const crows = [
+        { el: document.getElementById('crow1'), pos: 50, dir: 1, min: 10, max: 280 },
+        { el: document.getElementById('crow2'), pos: 200, dir: -1, min: 10, max: 280 }
+    ];
+
+    setInterval(() => {
+        crows.forEach(crow => {
+            crow.pos += crow.dir * 3;
+            if (crow.pos > crow.max) {
+                crow.dir = -1;
+                crow.el.classList.add('flipping');
+            } else if (crow.pos < crow.min) {
+                crow.dir = 1;
+                crow.el.classList.remove('flipping');
+            }
+            crow.el.style.left = crow.pos + 'px';
+
+            // Random pecking behavior
+            if (Math.random() < 0.1) {
+                crow.el.classList.add('pecking');
+            } else if (Math.random() < 0.2) {
+                crow.el.classList.remove('pecking');
+            }
+        });
+    }, 50);
 </script>
 </body>
 </html>
