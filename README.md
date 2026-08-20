@@ -86,7 +86,7 @@ Din/
 
 ## Roadmap
 
-- [ ] Publish to APKPure
+- [✔] Published to APKPure
 - [ ] Firebase cleanup (unused dependencies)
 - [ ] Google Play release (pending developer account)
 - [ ] Turkish commentary layer for texts
