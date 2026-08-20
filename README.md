@@ -86,7 +86,7 @@ Din/
 
 ## Roadmap
 
-- [✔] Published to APKPure
+- [✔] Published to [APKPure](https://heg.tc/vsmuJ)
 - [ ] Firebase cleanup (unused dependencies)
 - [ ] Google Play release (pending developer account)
 - [ ] Turkish commentary layer for texts
