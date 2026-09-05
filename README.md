@@ -1,47 +1,68 @@
+<div align="center">
+
+<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" width="96" alt="Scriptorium logo">
+
 # Scriptorium
-#scriptorium
 
-**A personal digital library for sacred and classical texts — Torah, Bible, Quran, Sahih al-Bukhari, Talmud, Bhagavad Gita, and translation, all in one place.**
+**One offline Android library for the world's sacred texts — Torah, Bible, Quran, Sahih al-Bukhari, Talmud and Bhagavad Gita, side by side.**
 
-[![Build Status](https://github.com/muhsintags/Din/actions/workflows/build.yml/badge.svg)](https://github.com/muhsintags/Din/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/muhsintags/Stable-Scriptorium/blob/main/LICENSE) [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin)](https://kotlinlang.org) [![Latest Release](https://img.shields.io/github/v/release/muhsintags/Din)](https://github.com/muhsintags/Din/releases/latest)
+[![Build](https://github.com/muhsintags/Stable-Scriptorium/actions/workflows/build.yml/badge.svg)](https://github.com/muhsintags/Stable-Scriptorium/actions/workflows/build.yml)
+[![Latest Release](https://img.shields.io/github/v/release/muhsintags/Stable-Scriptorium?display_name=tag)](https://github.com/muhsintags/Stable-Scriptorium/releases/latest)
+[![Downloads](https://img.shields.io/github/downloads/muhsintags/Stable-Scriptorium/total)](https://github.com/muhsintags/Stable-Scriptorium/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org)
+[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=android&logoColor=white)](https://developer.android.com/compose)
+[![Stars](https://img.shields.io/github/stars/muhsintags/Stable-Scriptorium?style=flat)](https://github.com/muhsintags/Stable-Scriptorium/stargazers)
 
-[Download](#download) ▸ [Features](#features) ▸ [Tech Stack](#tech-stack) ▸ [Build](#build--run) ▸ [Contributing](#contributing)
+[**⬇ Download APK**](https://github.com/muhsintags/Stable-Scriptorium/releases/latest) ·
+[Screenshots](#screenshots) ·
+[Features](#features) ·
+[Tech stack](#tech-stack) ·
+[Build](#build--run) ·
+[Contributing](#contributing)
+
+</div>
 
 ---
 
-## About
-#about
+## Why Scriptorium?
 
-**Scriptorium** *(formerly "Din Kütüphanesi")* is a native Android app that brings sacred and classical texts from multiple traditions together in a single, clean, offline-friendly library — built for reading, comparing, and translating scripture without the clutter.
+Most scripture apps cover a single tradition, need a permanent internet connection, or bury the text under accounts, ads and daily-verse popups. Scriptorium does one thing: it gives you **six primary texts from four traditions in one reader**, downloads them once, and then works fully offline — no account, no ads, no tracking. Open two of them next to each other and compare a passage line by line.
+
+> Free and open source (MIT), ~4 MB, no ads, no analytics, no login.
+
+## Screenshots
+
+Coming shortly — drop `library.png`, `reader.png`, `compare.png` and `translate.png` into `docs/screenshots/` and uncomment the table below.
+
+<!--
+| Library | Reader | Comparative mode | Translation |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/screenshots/library.png" width="180"> | <img src="docs/screenshots/reader.png" width="180"> | <img src="docs/screenshots/compare.png" width="180"> | <img src="docs/screenshots/translate.png" width="180"> |
+-->
 
 ## Features
-#features
 
-- ▸ **Torah** — full text, downloadable for offline reading
-- ▸ **Bible** — full text, downloadable for offline reading
-- ▸ **Quran** — full text, downloadable for offline reading
-- ▸ **Sahih al-Bukhari** — full text, downloadable for offline reading
-- ▸ **Talmud** — full text, downloadable for offline reading
-- ▸ **Bhagavad Gita** — full text, downloadable for offline reading
-- ▸ **Comparative Reading Mode** — read two texts side by side, with 3 different viewing modes to compare passages across traditions
-- ▸ **Translation** — integrated Google Translate support for cross-language reading
-- ▸ **Offline after first download** — texts are fetched once and stored locally via Room; no connection needed afterward
-- ▸ **Modern UI** — built entirely in Jetpack Compose with Material 3
+| | |
+| --- | --- |
+| **6 texts included** | Torah, Bible, Quran, Sahih al-Bukhari, Talmud, Bhagavad Gita |
+| **Comparative reading** | Two texts side by side in 3 different viewing modes |
+| **Works offline** | Each text is downloaded once and stored locally with Room |
+| **Built-in translation** | Google Translate integration for cross-language reading |
+| **Modern UI** | Jetpack Compose + Material 3, dark-mode friendly |
+| **Private by design** | No account, no ads, no analytics, no background network calls |
 
 ## Download
-#download
-
-Every push to `main` triggers an automatic build. You can grab an APK two ways:
 
 | Option | What you get | Where |
 | --- | --- | --- |
-| **Latest Release** | Stable, signed release APK | [Releases page](https://github.com/muhsintags/Stable-Scriptorium/releases/latest) |
-| **Dev Build** | Freshest debug build (may be unstable) | [Actions tab](https://github.com/muhsintags/Stable-Scriptorium/actions) → latest run → Artifacts |
+| **Latest release** | Stable, signed release APK | [Releases](https://github.com/muhsintags/Stable-Scriptorium/releases/latest) |
+| **APKPure** | Store install & auto-updates | [apkpure.com/p/com.muhsintags.scriptorium](https://apkpure.com/p/com.muhsintags.scriptorium) |
+| **Dev build** | Freshest debug build (may be unstable) | [Actions](https://github.com/muhsintags/Stable-Scriptorium/actions) → latest run → Artifacts |
 
-Also available on [APKPure](https://apkpure.com/p/com.muhsintags.scriptorium).
+Requires Android 8.0+ · ~4 MB download · texts are fetched on first open.
 
-## Tech Stack
-#tech-stack
+## Tech stack
 
 | Layer | Choice |
 | --- | --- |
@@ -54,76 +75,69 @@ Also available on [APKPure](https://apkpure.com/p/com.muhsintags.scriptorium).
 | CI/CD | GitHub Actions |
 | Dev environment | GitHub Codespaces |
 
-> This project is built entirely in the cloud — no local Android Studio setup required. Every build, test, and release runs through GitHub Actions and Codespaces.
+> Built entirely in the cloud — no local Android Studio setup. Every build, test and release runs through GitHub Actions and Codespaces, from a phone and a browser.
 
-## Build & Run
-#build--run
+## Build & run
 
-**Locally / in Codespaces:**
+```bash
+git clone https://github.com/muhsintags/Stable-Scriptorium.git
+cd Stable-Scriptorium
+./gradlew assembleDebug      # debug APK
+./gradlew assembleRelease    # signed release (needs keystore secrets)
+```
+
+Or push to `main` and download `app-debug` / `app-release` from the [Actions](https://github.com/muhsintags/Stable-Scriptorium/actions) run artifacts.
+
+## Project structure
 
 ```
-./gradlew assembleDebug      # debug build
-./gradlew assembleRelease    # signed release build (requires keystore secrets)
-```
-
-**Via GitHub Actions (recommended):** Push to `main` → check the [Actions tab](https://github.com/muhsintags/Stable-Scriptorium/actions) → download `app-debug` or `app-release` from the run's artifacts.
-
-## Project Structure
-#project-structure
-
-```
-Din/
-├── app/                  # Main application module
+Stable-Scriptorium/
+├── app/                  # Application module (Compose UI, Room, repositories)
 ├── gradle/               # Gradle wrapper & version catalog
 ├── .github/workflows/    # CI/CD build pipeline
-└── Versions/             # Version history / notes
+├── Versions/             # Archived APK builds
+├── index.html            # Landing page (GitHub Pages)
+└── privacy.html          # Privacy policy
 ```
 
-## Version History
-#version-history
-
-| Version | Notes |
-| --- | --- |
-| v1.0 | Initial release |
-| v1.1 | Comparative Reading Mode (3 viewing modes), Firebase dependency cleanup |
-| v2.0 (planned) | 3 new texts planned: Guru Granth Sahib (Sikhism), Book of Mormon, Buddhist texts (Tripitaka / Sutta) |
-
 ## Roadmap
-#roadmap
 
-- [x] Publish to APKPure
-- [x] Firebase cleanup (unused dependencies)
-- [x] Comparative reading mode
-- [ ] Google Play release (pending developer account)
-- [ ] Turkish commentary layer for texts
+- [x] APKPure release
+- [x] Comparative reading mode (3 viewing modes)
+- [x] Firebase dependency cleanup
+- [ ] v2.0 — Guru Granth Sahib, Book of Mormon, Buddhist texts (Tripitaka / Sutta)
+- [ ] Turkish commentary layer
+- [ ] Full-text search across all texts
+- [ ] Bookmarks & notes
+- [ ] F-Droid / IzzyOnDroid listing
+- [ ] Google Play release
+
+Have a different priority? [Open an issue](https://github.com/muhsintags/Stable-Scriptorium/issues/new) and say so.
 
 ## Contributing
-#contributing
 
-This is currently a solo personal project, but bug reports, suggestions, and feedback are always welcome — open an [Issue](https://github.com/muhsintags/Stable-Scriptorium/issues) any time.
+A solo project, but issues, ideas and pull requests are all welcome. Good first contributions:
 
-Feel free to fork the repo and build your own version too. Some ideas to get you started:
+- **Translate the UI** into your language — a native speaker beats machine translation
+- **Add a text** that isn't in the library yet
+- **Extend comparative mode** with new viewing options
+- **Fork it into a philosophy library** — Stoics, Confucius, classical works instead of scripture
+- **Report a rendering bug** with a screenshot and your device model
 
-- ▸ Build a **philosophy library** — Stoic, Confucian, or other classical texts instead of religious ones
-- ▸ **Translate the app into your own language** before official support arrives — a native speaker's translation is often more accurate than a machine one (e.g. Japanese, before it's officially supported)
-- ▸ Add a **new sacred or classical text** not currently included
-- ▸ Extend the **comparative reading mode** with more viewing options or additional traditions
+## Privacy
 
-## Built With AI Assistance
-#built-with-ai-assistance
+Scriptorium collects nothing. No account, no analytics, no ads. Full policy: [muhsintags.github.io/Stable-Scriptorium/privacy.html](https://muhsintags.github.io/Stable-Scriptorium/privacy.html)
 
-This project was developed with the help of AI tools:
+## Built with AI assistance
 
-- **Claude** (Anthropic)
-- **ChatGPT** (OpenAI)
-- **Google AI Studio**
-- **Gemini**
+Developed with help from Claude (Anthropic), ChatGPT (OpenAI), Google AI Studio and Gemini.
 
 ## License
-#license
 
-Licensed under the [MIT License](https://github.com/muhsintags/Stable-Scriptorium/blob/main/LICENSE).
+[MIT](LICENSE) © muhsintags
 
----
+<div align="center">
 
-Made with a lot of coffee and GitHub Actions minutes.
+If Scriptorium is useful to you, a ⭐ helps other people find it.
+
+</div>
