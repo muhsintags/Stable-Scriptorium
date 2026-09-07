@@ -16,6 +16,3 @@
 local.properties
 .env
 debug.keystore
-keystore_base64.txt
-keystore.jks
-*.jks

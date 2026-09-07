@@ -1,68 +1,61 @@
-<div align="center">
-
-<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" width="96" alt="Scriptorium logo">
-
 # Scriptorium
 
-**One offline Android library for the world's sacred texts — Torah, Bible, Quran, Sahih al-Bukhari, Talmud and Bhagavad Gita, side by side.**
+> Library of humanity
 
-[![Build](https://github.com/muhsintags/Stable-Scriptorium/actions/workflows/build.yml/badge.svg)](https://github.com/muhsintags/Stable-Scriptorium/actions/workflows/build.yml)
-[![Latest Release](https://img.shields.io/github/v/release/muhsintags/Stable-Scriptorium?display_name=tag)](https://github.com/muhsintags/Stable-Scriptorium/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/muhsintags/Stable-Scriptorium/total)](https://github.com/muhsintags/Stable-Scriptorium/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org)
-[![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=android&logoColor=white)](https://developer.android.com/compose)
-[![Stars](https://img.shields.io/github/stars/muhsintags/Stable-Scriptorium?style=flat)](https://github.com/muhsintags/Stable-Scriptorium/stargazers)
+**A personal digital library for sacred and classical texts — Torah, Bible, Quran, Sahih al-Bukhari, Talmud, Bhagavad Gita, and translation, all in one place.**
 
-[**⬇ Download APK**](https://github.com/muhsintags/Stable-Scriptorium/releases/latest) ·
-[Screenshots](#screenshots) ·
-[Features](#features) ·
-[Tech stack](#tech-stack) ·
-[Build](#build--run) ·
-[Contributing](#contributing)
+[![Build Status](https://github.com/muhsintags/unstable-scriptorium/actions/workflows/build.yml/badge.svg)](https://github.com/muhsintags/unstable-scriptorium/actions) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin)](https://kotlinlang.org) [![Android](https://img.shields.io/badge/Android-API%2024%2B-3DDC84?logo=android)](https://developer.android.com)
 
-</div>
+[Download](#download) ▸ [Features](#features) ▸ [Languages](#languages) ▸ [Tech Stack](#tech-stack) ▸ [Build](#build--run) ▸ [Privacy](#privacy) ▸ [Contributing](#contributing)
 
 ---
 
-## Why Scriptorium?
+## About
+#about
 
-Most scripture apps cover a single tradition, need a permanent internet connection, or bury the text under accounts, ads and daily-verse popups. Scriptorium does one thing: it gives you **six primary texts from four traditions in one reader**, downloads them once, and then works fully offline — no account, no ads, no tracking. Open two of them next to each other and compare a passage line by line.
-
-> Free and open source (MIT), ~4 MB, no ads, no analytics, no login.
-
-## Screenshots
-
-Coming shortly — drop `library.png`, `reader.png`, `compare.png` and `translate.png` into `docs/screenshots/` and uncomment the table below.
-
-<!--
-| Library | Reader | Comparative mode | Translation |
-| :---: | :---: | :---: | :---: |
-| <img src="docs/screenshots/library.png" width="180"> | <img src="docs/screenshots/reader.png" width="180"> | <img src="docs/screenshots/compare.png" width="180"> | <img src="docs/screenshots/translate.png" width="180"> |
--->
+**Scriptorium** is a native Android app that brings sacred and classical texts from multiple traditions together in a clean, offline-friendly library. It is built for focused reading, comparative study, personal notes, and multilingual access without the clutter.
 
 ## Features
+#features
 
-| | |
-| --- | --- |
-| **6 texts included** | Torah, Bible, Quran, Sahih al-Bukhari, Talmud, Bhagavad Gita |
-| **Comparative reading** | Two texts side by side in 3 different viewing modes |
-| **Works offline** | Each text is downloaded once and stored locally with Room |
-| **Built-in translation** | Google Translate integration for cross-language reading |
-| **Modern UI** | Jetpack Compose + Material 3, dark-mode friendly |
-| **Private by design** | No account, no ads, no analytics, no background network calls |
+- ▸ **Multi-tradition library** — Torah, Bible/Gospel, Quran, Sahih al-Bukhari, Talmud, and Bhagavad Gita
+- ▸ **Comparative Reading Mode** — compare two or three sources with parallel cards, split columns, chapter selection, filtering, and source swapping
+- ▸ **Three-language interface** — Turkish, English, and Russian across navigation, reader controls, dialogs, notifications, and catalogue metadata
+- ▸ **Language-aware scripture data** — Turkish, English, and Russian book/surah names, Russian Quran edition support, and language-aware offline cache keys
+- ▸ **Offline-first reading** — download complete books or individual chapters; content is cached locally with Room and file storage
+- ▸ **Reading tools** — adjustable font size, serif/sans-serif typography, line height, light/dark/sepia themes, original text, bilingual mode, and audio playback where available
+- ▸ **Personal study** — notes, highlights, bookmarks, reading history, progress tracking, and contemplation timer
+- ▸ **Daily verse notifications** — scheduled wisdom notifications with the selected application language
+- ▸ **Live content integration** — Quran, Bible, Torah, Talmud, Bukhari, and Gita content can be loaded from their configured sources and retained offline
+- ▸ **Automatic updates** — optional GitHub-based update checks with localized update dialogs
+- ▸ **Modern Android UI** — Jetpack Compose, Material 3, animated navigation, responsive reader layouts, and a custom Scriptorium launcher logo
+
+## Languages
+
+The application supports:
+
+| Code | Interface | Content behavior |
+| --- | --- | --- |
+| `TR` | Türkçe | Turkish interface and Turkish translations where available |
+| `EN` | English | English interface and English translations where available |
+| `RU` | Русский | Russian interface, Russian catalogue names, and Russian Quran translation |
+
+Language selection is persisted across launches. Existing values such as `TR`, `EN`, `RU`, `tr-TR`, and `ru-RU` are accepted. On a first launch, Turkish and Russian device locales select their matching language; other locales default to English. Downloaded scripture content is cached separately per language so changing language does not reuse the wrong translation.
 
 ## Download
+#download
+
+Every push to `main` triggers an automatic build. You can grab an APK two ways:
 
 | Option | What you get | Where |
 | --- | --- | --- |
-| **Latest release** | Stable, signed release APK | [Releases](https://github.com/muhsintags/Stable-Scriptorium/releases/latest) |
-| **APKPure** | Store install & auto-updates | [apkpure.com/p/com.muhsintags.scriptorium](https://apkpure.com/p/com.muhsintags.scriptorium) |
-| **Dev build** | Freshest debug build (may be unstable) | [Actions](https://github.com/muhsintags/Stable-Scriptorium/actions) → latest run → Artifacts |
+| **Latest Release** | Stable, signed release APK | [Releases page](https://github.com/muhsintags/unstable-scriptorium/releases/latest) |
+| **Dev Build** | Freshest debug build (may be unstable) | [Actions tab](https://github.com/muhsintags/unstable-scriptorium/actions) → latest run → Artifacts |
 
-Requires Android 8.0+ · ~4 MB download · texts are fetched on first open.
+Also available on [APKPure](https://apkpure.com/p/com.muhsintags.scriptorium) when a release is published.
 
-## Tech stack
+## Tech Stack
+#tech-stack
 
 | Layer | Choice |
 | --- | --- |
@@ -75,69 +68,92 @@ Requires Android 8.0+ · ~4 MB download · texts are fetched on first open.
 | CI/CD | GitHub Actions |
 | Dev environment | GitHub Codespaces |
 
-> Built entirely in the cloud — no local Android Studio setup. Every build, test and release runs through GitHub Actions and Codespaces, from a phone and a browser.
+The application ID is `com.muhsintags.scriptorium`, with `minSdk 24`, `targetSdk 36`, and version `1.0` / version code `1` in the current configuration.
 
-## Build & run
+> This project is built entirely in the cloud — no local Android Studio setup required. Every build, test, and release runs through GitHub Actions and Codespaces.
 
-```bash
-git clone https://github.com/muhsintags/Stable-Scriptorium.git
-cd Stable-Scriptorium
-./gradlew assembleDebug      # debug APK
-./gradlew assembleRelease    # signed release (needs keystore secrets)
-```
+## Build & Run
+#build--run
 
-Or push to `main` and download `app-debug` / `app-release` from the [Actions](https://github.com/muhsintags/Stable-Scriptorium/actions) run artifacts.
-
-## Project structure
+**Locally / in Codespaces:**
 
 ```
-Stable-Scriptorium/
-├── app/                  # Application module (Compose UI, Room, repositories)
+./gradlew assembleDebug      # debug build
+./gradlew assembleRelease    # signed release build (requires keystore secrets)
+```
+
+The release build expects `KEYSTORE_PATH`, `STORE_PASSWORD`, `KEY_ALIAS`, and `KEY_PASSWORD`. Do not commit keystores or encoded signing keys. Use `.env.example` for local configuration and GitHub Actions secrets for CI.
+
+**Via GitHub Actions:** Push to `main` or start the workflow manually from the [Actions tab](https://github.com/muhsintags/unstable-scriptorium/actions). The workflow generates a debug keystore, configures Gradle, builds both variants, and publishes `app-debug` and `app-release` artifacts.
+
+## Project Structure
+#project-structure
+
+```
+unstable-scriptorium/
+├── app/                  # Main application module
 ├── gradle/               # Gradle wrapper & version catalog
+├── app/src/main/java/    # Compose UI, ViewModel, repositories, API and data models
+├── app/src/main/res/     # Android resources and launcher logo
+├── app/src/test/         # Unit, Robolectric and screenshot tests
 ├── .github/workflows/    # CI/CD build pipeline
-├── Versions/             # Archived APK builds
-├── index.html            # Landing page (GitHub Pages)
-└── privacy.html          # Privacy policy
+└── index.html            # Localized privacy policy page
 ```
+
+## Current Status
+#current-status
+
+- Native Android application is active on the `main` branch.
+- Turkish, English, and Russian application language flows are implemented.
+- Debug and release APKs are built automatically in GitHub Actions.
+- Release signing material remains outside the repository.
 
 ## Roadmap
+#roadmap
 
-- [x] APKPure release
-- [x] Comparative reading mode (3 viewing modes)
+- [x] Publish to APKPure
 - [x] Firebase dependency cleanup
-- [ ] v2.0 — Guru Granth Sahib, Book of Mormon, Buddhist texts (Tripitaka / Sutta)
-- [ ] Turkish commentary layer
-- [ ] Full-text search across all texts
-- [ ] Bookmarks & notes
-- [ ] F-Droid / IzzyOnDroid listing
-- [ ] Google Play release
-
-Have a different priority? [Open an issue](https://github.com/muhsintags/Stable-Scriptorium/issues/new) and say so.
-
-## Contributing
-
-A solo project, but issues, ideas and pull requests are all welcome. Good first contributions:
-
-- **Translate the UI** into your language — a native speaker beats machine translation
-- **Add a text** that isn't in the library yet
-- **Extend comparative mode** with new viewing options
-- **Fork it into a philosophy library** — Stoics, Confucius, classical works instead of scripture
-- **Report a rendering bug** with a screenshot and your device model
+- [x] Comparative reading mode
+- [x] Turkish, English, and Russian localization
+- [x] Language-aware offline caching
+- [x] Custom Scriptorium application logo
+- [ ] Google Play release (pending developer account)
+- [ ] Turkish commentary layer for texts
+- [ ] Expand the catalogue with additional classical and sacred texts
 
 ## Privacy
 
-Scriptorium collects nothing. No account, no analytics, no ads. Full policy: [muhsintags.github.io/Stable-Scriptorium/privacy.html](https://muhsintags.github.io/Stable-Scriptorium/privacy.html)
+Scriptorium is designed to keep personal study data on the device. Notes, highlights, reading history, settings, and downloaded content are stored locally. The app does not include analytics, advertising, or tracking services. Network access is used for configured scripture sources, translation/content services, update checks, and optional location-based prayer times.
 
-## Built with AI assistance
+The full privacy policy is available in [index.html](index.html) and includes English, Turkish, Russian, Arabic, Hindi, Hebrew, and German.
 
-Developed with help from Claude (Anthropic), ChatGPT (OpenAI), Google AI Studio and Gemini.
+## Contributing
+#contributing
+
+This is currently a solo personal project, but bug reports, suggestions, and feedback are always welcome — open an [Issue](https://github.com/muhsintags/unstable-scriptorium/issues) any time.
+
+Feel free to fork the repo and build your own version too. Some ideas to get you started:
+
+- ▸ Build a **philosophy library** — Stoic, Confucian, or other classical texts instead of religious ones
+- ▸ **Translate the app into your own language** before official support arrives — a native speaker's translation is often more accurate than a machine one (e.g. Japanese, before it's officially supported)
+- ▸ Add a **new sacred or classical text** not currently included
+- ▸ Extend the **comparative reading mode** with more viewing options or additional traditions
+
+## Built With AI Assistance
+#built-with-ai-assistance
+
+This project was developed with the help of AI tools:
+
+- **Claude** (Anthropic)
+- **ChatGPT** (OpenAI)
+- **Google AI Studio**
+- **Gemini**
 
 ## License
+#license
 
-[MIT](LICENSE) © muhsintags
+Licensed under the [MIT License](LICENSE).
 
-<div align="center">
+---
 
-If Scriptorium is useful to you, a ⭐ helps other people find it.
-
-</div>
+Made with a lot of coffee and GitHub Actions minutes.

@@ -110,10 +110,10 @@ fun SearchScreen(
 
     var expandedConceptTerm by remember { mutableStateOf<String?>(null) }
 
-    val popularConcepts = if (lang == com.example.ui.util.AppLanguage.EN) {
-        listOf("Wisdom", "Justice", "Peace", "Mercy", "Enlightenment", "Truth")
-    } else {
-        listOf("Hikmet", "Adalet", "Barış", "Merhamet", "Aydınlanma", "Hakikat")
+    val popularConcepts = when (lang) {
+        AppLanguage.RU -> listOf("Мудрость", "Справедливость", "Мир", "Милосердие", "Просветление", "Истина")
+        AppLanguage.EN -> listOf("Wisdom", "Justice", "Peace", "Mercy", "Enlightenment", "Truth")
+        AppLanguage.TR -> listOf("Hikmet", "Adalet", "Barış", "Merhamet", "Aydınlanma", "Hakikat")
     }
 
     Scaffold(
@@ -153,14 +153,18 @@ fun SearchScreen(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             contentPadding = PaddingValues(bottom = 100.dp)
         ) {
-            // 1. Large Search Bar (Kavram, metin veya öğreti ara...)
+            // 1. Large Search Bar
             item {
                 TextField(
                     value = searchQuery,
                     onValueChange = { searchQuery = it },
                     placeholder = {
                         Text(
-                            text = "Kavram, metin veya öğreti ara...",
+                            text = when (lang) {
+                                AppLanguage.RU -> "Поиск понятий, стихов или учений..."
+                                AppLanguage.EN -> "Search concept, scripture, or teaching..."
+                                AppLanguage.TR -> "Kavram, metin veya öğreti ara..."
+                            },
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f)
                         )
@@ -168,7 +172,11 @@ fun SearchScreen(
                     leadingIcon = {
                         Icon(
                             imageVector = Icons.Filled.Search,
-                            contentDescription = "Search Icon",
+                            contentDescription = when (lang) {
+                                AppLanguage.RU -> "Поиск"
+                                AppLanguage.EN -> "Search"
+                                AppLanguage.TR -> "Ara"
+                            },
                             tint = MaterialTheme.colorScheme.primary
                         )
                     },
@@ -177,7 +185,11 @@ fun SearchScreen(
                             IconButton(onClick = { searchQuery = "" }) {
                                 Icon(
                                     imageVector = Icons.Filled.Close,
-                                    contentDescription = "Clear",
+                                    contentDescription = when (lang) {
+                                        AppLanguage.RU -> "Очистить"
+                                        AppLanguage.EN -> "Clear"
+                                        AppLanguage.TR -> "Temizle"
+                                    },
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
                             }
@@ -198,11 +210,15 @@ fun SearchScreen(
                 )
             }
 
-            // 2. Popular Concepts Chips (POPÜLER KAVRAMLAR)
+            // 2. Popular Concepts Chips
             item {
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
-                        text = "POPÜLER KAVRAMLAR",
+                        text = when (lang) {
+                            AppLanguage.RU -> "ПОПУЛЯРНЫЕ ПОНЯТИЯ"
+                            AppLanguage.EN -> "POPULAR CONCEPTS"
+                            AppLanguage.TR -> "POPÜLER KAVRAMLAR"
+                        },
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                         letterSpacing = 1.sp,
@@ -238,7 +254,7 @@ fun SearchScreen(
                 }
             }
 
-            // 3. Search Results or Suggested Readings (ÖNERİLEN OKUMALAR)
+            // 3. Search Results or Suggested Readings
             item {
                 Row(
                     modifier = Modifier
@@ -248,14 +264,30 @@ fun SearchScreen(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = if (searchQuery.isEmpty()) "ÖNERİLEN OKUMALAR" else "ARAMA SONUÇLARI",
+                        text = if (searchQuery.isEmpty()) {
+                            when (lang) {
+                                AppLanguage.RU -> "РЕКОМЕНДУЕМЫЕ ЧТЕНИЯ"
+                                AppLanguage.EN -> "RECOMMENDED READINGS"
+                                AppLanguage.TR -> "ÖNERİLEN OKUMALAR"
+                            }
+                        } else {
+                            when (lang) {
+                                AppLanguage.RU -> "РЕЗУЛЬТАТЫ ПОИСКА"
+                                AppLanguage.EN -> "SEARCH RESULTS"
+                                AppLanguage.TR -> "ARAMA SONUÇLARI"
+                            }
+                        },
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f),
                         letterSpacing = 1.sp
                     )
                     if (searchQuery.isNotEmpty()) {
                         Text(
-                            text = "$totalResultsCount Sonuç",
+                            text = when (lang) {
+                                AppLanguage.RU -> "$totalResultsCount результатов"
+                                AppLanguage.EN -> "$totalResultsCount Results"
+                                AppLanguage.TR -> "$totalResultsCount Sonuç"
+                            },
                             style = MaterialTheme.typography.labelMedium,
                             color = SacredGold
                         )
@@ -264,9 +296,9 @@ fun SearchScreen(
             }
 
             if (searchQuery.isEmpty()) {
-                // SUGGESTED READINGS (ÖNERİLEN OKUMALAR) - original list of books
+                // SUGGESTED READINGS - original list of books
                 items(allBooks) { book ->
-                    BookCard(book = book, onNavigateToBook = onNavigateToBook)
+                    BookCard(book = book, lang = lang, onNavigateToBook = onNavigateToBook)
                 }
             } else {
                 if (totalResultsCount == 0) {
@@ -285,7 +317,11 @@ fun SearchScreen(
                                 modifier = Modifier.size(64.dp)
                             )
                             Text(
-                                text = "Aradığınız kavramla eşleşen metin bulunamadı.",
+                                text = when (lang) {
+                                    AppLanguage.RU -> "По вашему запросу текстов или понятий не найдено."
+                                    AppLanguage.EN -> "No scripture text or concept matching your search was found."
+                                    AppLanguage.TR -> "Aradığınız kavramla eşleşen metin bulunamadı."
+                                },
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 textAlign = TextAlign.Center
@@ -308,7 +344,11 @@ fun SearchScreen(
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Text(
-                                    text = "Sözlük Kavramları (${matchedDictionaryTerms.size})",
+                                    text = when (lang) {
+                                        AppLanguage.RU -> "Понятия словаря (${matchedDictionaryTerms.size})"
+                                        AppLanguage.EN -> "Dictionary Concepts (${matchedDictionaryTerms.size})"
+                                        AppLanguage.TR -> "Sözlük Kavramları (${matchedDictionaryTerms.size})"
+                                    },
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
@@ -366,9 +406,21 @@ fun SearchScreen(
                                         ) {
                                             Text(
                                                 text = when (term.category) {
-                                                    TermCategory.ISLAMIC -> "İslami"
-                                                    TermCategory.BIBLICAL -> "Kitab-ı Mukaddes"
-                                                    else -> "Genel"
+                                                    TermCategory.ISLAMIC -> when (lang) {
+                                                        AppLanguage.RU -> "Ислам"
+                                                        AppLanguage.EN -> "Islamic"
+                                                        AppLanguage.TR -> "İslami"
+                                                    }
+                                                    TermCategory.BIBLICAL -> when (lang) {
+                                                        AppLanguage.RU -> "Библия"
+                                                        AppLanguage.EN -> "Biblical"
+                                                        AppLanguage.TR -> "Kitab-ı Mukaddes"
+                                                    }
+                                                    else -> when (lang) {
+                                                        AppLanguage.RU -> "Общее"
+                                                        AppLanguage.EN -> "General"
+                                                        AppLanguage.TR -> "Genel"
+                                                    }
                                                 },
                                                 style = MaterialTheme.typography.labelSmall,
                                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
@@ -383,7 +435,7 @@ fun SearchScreen(
 
                                     // Meaning
                                     HighlightedText(
-                                        text = term.meaningTr,
+                                        text = term.meaning(lang),
                                         query = searchQuery
                                     )
 
@@ -394,38 +446,27 @@ fun SearchScreen(
                                         )
                                         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                             Text(
-                                                text = "Örnek Bağlam / Ayet:",
+                                                text = when (lang) {
+                                                    AppLanguage.RU -> "Пример контекста / Стих:"
+                                                    AppLanguage.EN -> "Example Context / Verse:"
+                                                    AppLanguage.TR -> "Örnek Bağlam / Ayet:"
+                                                },
                                                 style = MaterialTheme.typography.labelMedium,
                                                 fontWeight = FontWeight.Bold,
                                                 color = SacredGold
                                             )
                                             HighlightedText(
-                                                text = term.exampleTr,
+                                                text = term.example(lang),
                                                 query = searchQuery
                                             )
-                                            if (term.meaningEn.isNotEmpty()) {
-                                                Spacer(modifier = Modifier.height(4.dp))
-                                                Text(
-                                                    text = "English Meaning:",
-                                                    style = MaterialTheme.typography.labelMedium,
-                                                    fontWeight = FontWeight.Bold,
-                                                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.7f)
-                                                )
-                                                HighlightedText(
-                                                    text = term.meaningEn,
-                                                    query = searchQuery
-                                                )
-                                                if (term.exampleEn.isNotEmpty()) {
-                                                    HighlightedText(
-                                                        text = term.exampleEn,
-                                                        query = searchQuery
-                                                    )
-                                                }
-                                            }
                                         }
                                     } else {
                                         Text(
-                                            text = "Detayları görmek için tıklayın...",
+                                            text = when (lang) {
+                                                AppLanguage.RU -> "Нажмите, чтобы увидеть подробности..."
+                                                AppLanguage.EN -> "Tap to view details..."
+                                                AppLanguage.TR -> "Detayları görmek için tıklayın..."
+                                            },
                                             style = MaterialTheme.typography.labelSmall,
                                             color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
                                             modifier = Modifier.align(Alignment.End)
@@ -451,7 +492,11 @@ fun SearchScreen(
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Text(
-                                    text = "Metin İçindeki Ayetler (${matchedPassages.size})",
+                                    text = when (lang) {
+                                        AppLanguage.RU -> "Стихи из Писаний (${matchedPassages.size})"
+                                        AppLanguage.EN -> "Scripture Verses (${matchedPassages.size})"
+                                        AppLanguage.TR -> "Metin İçindeki Ayetler (${matchedPassages.size})"
+                                    },
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
@@ -492,14 +537,18 @@ fun SearchScreen(
                                                 modifier = Modifier.size(16.dp)
                                             )
                                             Text(
-                                                text = match.book.title,
+                                                text = Loc.get(match.book.id, lang).ifEmpty { match.book.title },
                                                 style = MaterialTheme.typography.titleSmall,
                                                 fontWeight = FontWeight.Bold,
                                                 color = MaterialTheme.colorScheme.onSurface
                                             )
                                         }
                                         Text(
-                                            text = "Pasaj ${match.paragraphIndex + 1}",
+                                            text = when (lang) {
+                                                AppLanguage.RU -> "Отрывок ${match.paragraphIndex + 1}"
+                                                AppLanguage.EN -> "Passage ${match.paragraphIndex + 1}"
+                                                AppLanguage.TR -> "Pasaj ${match.paragraphIndex + 1}"
+                                            },
                                             style = MaterialTheme.typography.labelSmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f)
                                         )
@@ -516,7 +565,11 @@ fun SearchScreen(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Text(
-                                            text = "Kitapta Oku",
+                                            text = when (lang) {
+                                                AppLanguage.RU -> "Читать в Писании"
+                                                AppLanguage.EN -> "Read in Scripture"
+                                                AppLanguage.TR -> "Kitapta Oku"
+                                            },
                                             style = MaterialTheme.typography.labelMedium,
                                             color = MaterialTheme.colorScheme.primary,
                                             fontWeight = FontWeight.SemiBold
@@ -549,7 +602,11 @@ fun SearchScreen(
                                     modifier = Modifier.size(18.dp)
                                 )
                                 Text(
-                                    text = "Eşleşen Kutsal Kitaplar (${matchedBooks.size})",
+                                    text = when (lang) {
+                                        AppLanguage.RU -> "Священные Книги (${matchedBooks.size})"
+                                        AppLanguage.EN -> "Sacred Scriptures (${matchedBooks.size})"
+                                        AppLanguage.TR -> "Eşleşen Kutsal Kitaplar (${matchedBooks.size})"
+                                    },
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
                                     color = MaterialTheme.colorScheme.primary
@@ -558,7 +615,7 @@ fun SearchScreen(
                         }
 
                         items(matchedBooks) { book ->
-                            BookCard(book = book, onNavigateToBook = onNavigateToBook)
+                            BookCard(book = book, lang = lang, onNavigateToBook = onNavigateToBook)
                         }
                     }
                 }
@@ -570,6 +627,7 @@ fun SearchScreen(
 @Composable
 fun BookCard(
     book: Book,
+    lang: AppLanguage = AppLanguage.EN,
     onNavigateToBook: (Book) -> Unit
 ) {
     Card(
@@ -609,13 +667,45 @@ fun BookCard(
                 )
                 Column {
                     Text(
-                        text = book.title,
+                        text = Loc.get(book.id, lang).ifEmpty { book.title },
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                     Text(
-                        text = book.authorOrSource,
+                        text = when (book.id) {
+                            "quran" -> when (lang) {
+                                AppLanguage.RU -> "Священный Коран • Арабский и русский"
+                                AppLanguage.EN -> "Holy Quran • Arabic & English"
+                                AppLanguage.TR -> "Kur'an-ı Kerim • Diyanet Meali"
+                            }
+                            "torah" -> when (lang) {
+                                AppLanguage.RU -> "Тора • Иврит и русский"
+                                AppLanguage.EN -> "Torah • Hebrew & English"
+                                AppLanguage.TR -> "Tevrat • Türkçe & İbranice"
+                            }
+                            "sermon" -> when (lang) {
+                                AppLanguage.RU -> "Евангелие • Греческий и русский"
+                                AppLanguage.EN -> "Gospel • Greek & English"
+                                AppLanguage.TR -> "İncil • Türkçe & Grekçe"
+                            }
+                            "talmud" -> when (lang) {
+                                AppLanguage.RU -> "Талмуд • Арамейский и русский"
+                                AppLanguage.EN -> "Talmud • Aramaic & English"
+                                AppLanguage.TR -> "Talmud • Babil & İbranice"
+                            }
+                            "bukhari" -> when (lang) {
+                                AppLanguage.RU -> "Сахих аль-Бухари • Арабский и русский"
+                                AppLanguage.EN -> "Sahih Bukhari • Arabic & English"
+                                AppLanguage.TR -> "Sahih Buhârî • Hadis Külliyatı"
+                            }
+                            "gita" -> when (lang) {
+                                AppLanguage.RU -> "Бхагавад-гита • Санскрит и русский"
+                                AppLanguage.EN -> "Bhagavad Gita • Sanskrit & English"
+                                AppLanguage.TR -> "Bhagavad Gita • Sanskritçe"
+                            }
+                            else -> book.authorOrSource
+                        },
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -624,7 +714,11 @@ fun BookCard(
 
             Icon(
                 imageVector = Icons.Filled.ArrowForwardIos,
-                contentDescription = "Oku",
+                contentDescription = when (lang) {
+                    AppLanguage.RU -> "Читать"
+                    AppLanguage.EN -> "Read"
+                    AppLanguage.TR -> "Oku"
+                },
                 tint = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.5f),
                 modifier = Modifier.size(16.dp)
             )
