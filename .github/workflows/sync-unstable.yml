@@ -1,0 +1,45 @@
+name: Sync Unstable → Stable
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout stable
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Clone unstable
+        run: |
+          git clone --depth 1 \
+            https://github.com/muhsintags/unstable-scriptorium.git \
+            /tmp/unstable
+
+      - name: Sync files
+        run: |
+          rsync -av --delete \
+            --exclude='.git' \
+            /tmp/unstable/ \
+            ./
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+
+          git commit -m "Sync from unstable-scriptorium"
+          git push origin main
